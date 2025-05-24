@@ -6,7 +6,6 @@
 **Primary User:** Individual Developer (Personal Use)  
 **Secondary Users:** Open Source Community  
 **Document Version:** 1.0  
-**Last Updated:** December 2024
 
 ---
 
@@ -164,32 +163,32 @@ Using the five-question framework for each identified stakeholder:
 - **Interest Level**: NEUTRAL (SEC provides public data regardless of individual usage)
 - **Management Strategy**: Compliance-focused, minimal interaction, follow published guidelines
 
-#### Stakeholder 3: AI Service Provider (OpenAI/Anthropic)
+#### Stakeholder 3: Free AI Service Provider (HuggingFace/Colab/Local)
 
 **1. Does this stakeholder have a fundamental impact on project performance?**
 ✅ **YES** - Core functionality enabler for analysis generation
 
 **2. Can you clearly identify what you want to obtain from this stakeholder?**
 ✅ **SPECIFIC REQUIREMENTS:**
-- Reliable API access for text analysis
-- Cost-effective pricing for personal use volume
-- Quality Spanish-language output generation
-- Financial analysis capability
+- Free API access or local model deployment
+- Spanish-language analysis capability
+- Financial domain text processing
+- Reliable service availability within free tier limits
 
 **3. Is the relationship dynamic? Do you want it to grow?**
-⚠️ **CONDITIONAL** - Growth depends on personal usage patterns and potential community adoption
+⚠️ **CONDITIONAL** - Growth depends on service quality and continued free availability
 
 **4. Can you exist without this stakeholder or replace them easily?**
-⚠️ **PARTIALLY** - Alternative providers exist (OpenAI, Anthropic, Claude) with switching costs
+✅ **YES** - Multiple free alternatives available (HuggingFace, Google Colab, local models, free tier APIs)
 
 **5. Has this stakeholder been identified through another relationship?**
-❌ **NO** - Direct commercial API relationship
+❌ **NO** - Direct free service relationship
 
 **Stakeholder Impact Assessment:**
 - **Criticality**: HIGH (core functionality depends on AI analysis)
-- **Influence**: MEDIUM (pricing and terms set by provider)
-- **Interest Level**: LOW (individual user among millions)
-- **Management Strategy**: Cost monitoring, multi-provider fallback consideration
+- **Influence**: MEDIUM (free tier limitations but multiple alternatives)
+- **Interest Level**: LOW (individual user among millions on free tier)
+- **Management Strategy**: Service diversification, local model backup options, free tier optimization
 
 #### Stakeholder 4: Open Source Community (Secondary)
 
@@ -272,23 +271,24 @@ Using the five-question framework for each identified stakeholder:
 **Priority**: CRITICAL
 **User Validation**: *"Revenue, EBITDA, margins, debt, free cash flow, and multiples like P/E and EV/EBITDA, dividends"*
 
-#### FR003: AI-Powered Spanish Analysis Generation
-**Description**: Generate comprehensive business analysis in Spanish using AI language models
+#### FR003: AI-Powered Spanish Analysis Generation (Free Tier)
+**Description**: Generate comprehensive business analysis in Spanish using free AI services
 **Input**: Financial data and business context
 **Processing Logic**:
 1. Financial data normalization and context preparation
 2. AI prompt engineering with Spanish financial terminology
-3. LLM API call with structured analysis template
+3. Free AI service integration (HuggingFace Transformers, Google Colab, or local models)
 4. Output validation and quality checks
 5. Spanish language optimization
 **Output**: Comprehensive business analysis (300-500 words) in Spanish
 **Preconditions**: 
 - Financial data available
-- AI API functional and accessible
+- Free AI service accessible (HuggingFace API, local model, or Colab)
 - Spanish language model capability confirmed
 **Postconditions**: Analysis ready for user review and decision-making
-**Exceptions**: AI API failures, incomplete data, quality validation failures
+**Exceptions**: Free tier limitations, service unavailability, quality validation failures
 **Priority**: CRITICAL
+**Budget Constraint**: MUST use completely free AI services only
 **User Validation**: *"Detailed analysis because it gives me an idea of how the company is doing and whether I should buy it or not"*
 
 #### FR004: Business Context and Interpretation Engine
@@ -491,22 +491,25 @@ PHASE 2 ARCHITECTURE (Open Source):
 **External API Dependencies**:
 ```
 CRITICAL INTEGRATIONS:
-✅ SEC EDGAR API: Primary data source
+✅ SEC EDGAR API: Primary data source (FREE)
 - Base URL: https://data.sec.gov/api/
 - Rate limit: 10 requests/second
 - Authentication: User-Agent header required
+- Cost: $0 (Free public API)
 - Data format: JSON responses
 
-✅ AI Service API: Analysis generation
-- Primary: OpenAI GPT-4 API
-- Backup: Anthropic Claude API  
-- Cost estimation: $0.01-0.05 per analysis
+✅ Free AI Service Integration: Analysis generation (FREE OPTIONS)
+- Option 1: HuggingFace Transformers API (Free tier)
+- Option 2: Google Colab with free GPU access
+- Option 3: Local language models (Ollama, LM Studio)  
+- Option 4: OpenAI/Anthropic free tier (if available)
+- Cost estimation: $0 (Must use free options only)
 - Response format: Structured text in Spanish
 
 OPTIONAL INTEGRATIONS (Phase 2):
-- Yahoo Finance API: Market data supplementation
-- Currency conversion API: International user support
-- Email API: Analysis sharing functionality
+- Yahoo Finance API: Market data supplementation (FREE)
+- Currency conversion API: International user support (FREE tier only)
+- Email API: Analysis sharing functionality (FREE tier only)
 ```
 
 **Data Flow Architecture**:
@@ -1496,19 +1499,21 @@ BUILT-IN FLEXIBILITY:
 
 #### Budget-Scope Alignment Analysis
 
-**Phase 1 Budget Breakdown ($50 Total)**:
+**Phase 1 Budget Breakdown ($0 Total)**:
 ```
-API COSTS:
-- OpenAI API: $20-30 for development and testing
-- SEC API: Free (rate-limited public access)
-- Hosting: $0 (GitHub Pages)
-- Domain: $0 (GitHub Pages subdomain)
-- Development Tools: $0 (free tier services)
+SERVICE COSTS:
+- SEC EDGAR API: $0 (Free public government API)
+- AI Analysis: $0 (Free tier services only - HuggingFace, Colab, local models)
+- Hosting: $0 (GitHub Pages free hosting)
+- Domain: $0 (GitHub Pages subdomain: username.github.io)
+- Development Tools: $0 (VS Code, Git, free tier services)
 
-BUFFER ALLOCATION:
-- Unexpected API usage: $10-15
-- Additional services if needed: $5-10
-- Total budget utilization: 80-100% of $50 allocation
+ZERO BUDGET VALIDATION:
+- All services must have free tier or be completely free
+- No paid API calls or premium services
+- All development tools must be free/open source
+- Hosting must be free tier (GitHub Pages, Netlify, Vercel free)
+- Total project cost: $0.00
 ```
 
 **Resource Constraint Validation**:
@@ -1978,32 +1983,39 @@ EXPECTATION MANAGEMENT:
 
 ### Operational Risk Analysis
 
-#### Risk 6: API Cost Escalation
-**Risk Description**: AI API costs may exceed budget expectations with increased usage
-**Probability**: 50% (usage patterns difficult to predict accurately)
-**Impact**: MEDIUM (affects project sustainability but manageable)
-**Risk Score**: 5/10
+#### Risk 6: Free AI Service Limitations
+**Risk Description**: Free AI services may have usage limits, quality constraints, or availability issues
+**Probability**: 70% (free services typically have significant limitations)
+**Impact**: MEDIUM (affects analysis quality but alternatives exist)
+**Risk Score**: 6/10
 
 **Detailed Risk Factors**:
-- Personal usage frequency higher than estimated
-- AI analysis complexity requiring more tokens than projected
-- Community adoption leading to shared infrastructure costs
-- API pricing changes by providers
+- Daily/monthly usage limits on free AI APIs
+- Analysis quality may be lower than premium services
+- Service availability and uptime limitations
+- Rate limiting on free tiers
+- Model capability constraints for financial analysis
 
 **Mitigation Strategies**:
 ```
-COST MANAGEMENT:
-□ Usage monitoring and alerting systems
-□ Prompt optimization to reduce token consumption
-□ Caching strategies to minimize redundant API calls
-□ Budget limits and automatic cutoffs if exceeded
+FREE SERVICE DIVERSIFICATION:
+□ Multiple free AI service options prepared (HuggingFace, Colab, local models)
+□ Local model deployment as primary backup (Ollama, LM Studio)
+□ Usage monitoring to stay within free tier limits
+□ Analysis quality benchmarking across different free services
 
-COST OPTIMIZATION:
-□ Analysis of personal usage patterns to optimize costs
-□ Alternative AI provider evaluation for cost comparison
-□ Local processing options research for future development
-□ Community cost-sharing models if adoption occurs
+QUALITY ASSURANCE WITH FREE SERVICES:
+□ Prompt optimization specifically for free/smaller models
+□ Multi-service validation for critical analyses
+□ Manual review checkpoints for quality validation
+□ Gradual improvement of local model performance
 ```
+
+**Quality Metrics and Monitoring**:
+- Analysis quality comparison across free services
+- Usage tracking to avoid hitting free tier limits
+- Service availability monitoring and backup activation
+- Spanish language quality assessment with free models
 
 #### Risk 7: Regulatory Compliance Issues
 **Risk Description**: SEC data usage or financial analysis may have regulatory implications
